@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
@@ -22,16 +22,13 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
     {
         private const int ApiRequestMaxRetries = 5;
 
-        private const string PageSizeAppSettingKey = "PropertiesApi:pageSize";
-
         private readonly IPropertiesApi _propertiesApi;
-        private readonly IConfiguration _configuration;
         private readonly ILogger<PropertyDataHelper> _logger;
+        private const int PageSize = 25;
 
-        public PropertyDataHelper(IPropertiesApi propertiesApi, IConfiguration configuration, ILogger<PropertyDataHelper> logger)
+        public PropertyDataHelper(IPropertiesApi propertiesApi, ILogger<PropertyDataHelper> logger)
         {
             _propertiesApi = propertiesApi;
-            _configuration = configuration;
             _logger = logger;
         }
 
@@ -39,22 +36,36 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
         {
             var totalObjects = new List<PropertyDto>();
 
-            int.TryParse(_configuration[PageSizeAppSettingKey], out var pageSize);
+            // Get the first page in order to find the total number of pages
+            var firstApiResponseContent = await GetApiResponseContentForPageAsync(1, PageSize, typeOfSearch, searchQuery);
 
-            var currentPage = 1;
-            var totalPages = 0;
+            // Add the objects of the current page to the total amount of objects
+            totalObjects.AddRange(firstApiResponseContent.Properties);
 
-            do
+            var totalPages = Enumerable.Range(2, firstApiResponseContent.Paging.NumberOfPages).ToList();
+
+            // Setup the rest of the tasks
+            var getApiResponseTaskQuery =
+                from page in totalPages select GetApiResponseContentForPageAsync(page, PageSize, typeOfSearch, searchQuery);
+
+            // Use ToList to execute the query and start the tasks.
+            var apiResponseTasks = getApiResponseTaskQuery.ToList();
+
+            // Process the tasks one at a time until none remain.
+            while (apiResponseTasks.Count > 0)
             {
-                var apiResponseContent = await this.GetApiResponseContentForPageAsync(currentPage, pageSize, typeOfSearch, searchQuery);
+                // Identify the first task that completes.
+                var finishedTask = await Task.WhenAny(apiResponseTasks);
 
-                // Add the objects of the current page to the total amount of objects
+                // Remove the selected task from the list so that you don't process it more than once.
+                apiResponseTasks.Remove(finishedTask);
+
+                // Await the completed task.
+                var apiResponseContent = await finishedTask;
+
+                // Add the object of the page in the total objects
                 totalObjects.AddRange(apiResponseContent.Properties);
-
-                totalPages = apiResponseContent.Paging.NumberOfPages;
-
-                currentPage++;
-            } while (currentPage <= totalPages);
+            }
 
             return totalObjects;
         }
