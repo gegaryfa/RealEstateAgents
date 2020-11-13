@@ -61,7 +61,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
             // Arrange
             const int page = 1;
 
-            var testDataFilePath = Directory.GetCurrentDirectory() + "\\TestData\\ApiResponse-Properties.json";
+            var testDataFilePath = Directory.GetCurrentDirectory() + "/TestData/ApiResponse-Properties.json";
             var jsonData = await File.ReadAllTextAsync(testDataFilePath);
             var fundaApiResponseContent = JsonConvert.DeserializeObject<PropertiesApiResponse>(jsonData);
 
@@ -97,7 +97,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
             // Arrange
             const int page = 1;
 
-            var testDataFilePath = Directory.GetCurrentDirectory() + "\\TestData\\ApiResponse-PropertiesWithGarden.json";
+            var testDataFilePath = Directory.GetCurrentDirectory() + "/TestData/ApiResponse-PropertiesWithGarden.json";
             var jsonData = await File.ReadAllTextAsync(testDataFilePath);
             var fundaApiResponseContent = JsonConvert.DeserializeObject<PropertiesApiResponse>(jsonData);
 
