@@ -13,7 +13,7 @@ The project setup is based on Domain Driven Design.
 ### Prerequisites
 
 * [`GNU Make`](https://www.gnu.org/software/make/) - optional
-* [`.Net Core v3.1`](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+* [`.Net Core v5.0`](https://dotnet.microsoft.com/download/dotnet/5.0)
 * [`Docker`](https://www.docker.com/get-started)
 * Your favorite IDE/editor
 
@@ -26,7 +26,7 @@ After doing a request to the API, the properties of this specific request are be
 
 ## Built With
 
-* [.Net Core v3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+* [.Net Core v5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 * [AutoMapper](https://automapper.org/) - A convention-based objet-objet mapper.
 * [MediatR](https://github.com/jbogard/MediatR) - Simple mediator implementation in .NET.
 * [Swagger](https://swagger.io/) - Tools for documenting APIs.
