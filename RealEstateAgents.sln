@@ -3,23 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{512A9E77-BAFC-4497-971F-478DAF382E64}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{512A9E77-BAFC-4497-971F-478DAF382E64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{040BDAE2-C928-4D66-8A5B-A82092EFA03D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.WebApi", "RealEstateAgents\RealEstateAgents.WebApi\RealEstateAgents.WebApi.csproj", "{0B576FDC-1D06-46DB-82AE-C1D4A0B0F8CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.WebApi", "src\RealEstateAgents\RealEstateAgents.WebApi\RealEstateAgents.WebApi.csproj", "{0B576FDC-1D06-46DB-82AE-C1D4A0B0F8CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{09B9DB38-F128-4BF2-BCF1-6E7D4E92BAF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Application", "RealEstateAgents\RealEstateAgents.Application\RealEstateAgents.Application.csproj", "{AB68A3A2-4EF8-485B-802C-AB782C399CF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Application", "src\RealEstateAgents\RealEstateAgents.Application\RealEstateAgents.Application.csproj", "{AB68A3A2-4EF8-485B-802C-AB782C399CF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Domain", "RealEstateAgents\RealEstateAgents.Domain\RealEstateAgents.Domain.csproj", "{F3FA6EE8-F244-4D98-A7E6-9344723EE40C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Domain", "src\RealEstateAgents\RealEstateAgents.Domain\RealEstateAgents.Domain.csproj", "{F3FA6EE8-F244-4D98-A7E6-9344723EE40C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6793D5A5-2D9C-425A-A37D-B57C6178D22A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Infrastructure.Shared", "RealEstateAgents\RealEstateAgents.Infrastructure.Shared\RealEstateAgents.Infrastructure.Shared.csproj", "{95A8206A-E8F9-4132-9A6C-6FFB82586D78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Infrastructure.Shared", "src\RealEstateAgents\RealEstateAgents.Infrastructure.Shared\RealEstateAgents.Infrastructure.Shared.csproj", "{95A8206A-E8F9-4132-9A6C-6FFB82586D78}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6E6FD44D-7527-4330-99F0-CC08D207FB34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{9B55479B-49C9-46F2-A595-6978A1EB3F40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{92778F5D-63F7-4268-A633-1A068474D79F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgents.Infrastructure.Shared.Tests", "tst\Infrastructure\RealEstateAgents.Infrastructure.Shared.Tests\RealEstateAgents.Infrastructure.Shared.Tests.csproj", "{39701290-5D80-4D11-83F7-DD11B2B6C1B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,10 @@ Global
 		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +69,8 @@ Global
 		{F3FA6EE8-F244-4D98-A7E6-9344723EE40C} = {09B9DB38-F128-4BF2-BCF1-6E7D4E92BAF0}
 		{6793D5A5-2D9C-425A-A37D-B57C6178D22A} = {512A9E77-BAFC-4497-971F-478DAF382E64}
 		{95A8206A-E8F9-4132-9A6C-6FFB82586D78} = {6793D5A5-2D9C-425A-A37D-B57C6178D22A}
+		{92778F5D-63F7-4268-A633-1A068474D79F} = {9B55479B-49C9-46F2-A595-6978A1EB3F40}
+		{39701290-5D80-4D11-83F7-DD11B2B6C1B8} = {92778F5D-63F7-4268-A633-1A068474D79F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7ABB7CEE-36EE-4C88-98FF-55D54FC1EB31}

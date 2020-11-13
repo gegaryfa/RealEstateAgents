@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
+using EnsureThat;
+
 using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
@@ -34,6 +36,9 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
 
         public async Task<List<PropertyDto>> FetchAllProperties(string typeOfSearch, string searchQuery)
         {
+            EnsureArg.IsNotNull(typeOfSearch, nameof(typeOfSearch));
+            EnsureArg.IsNotNull(searchQuery, nameof(searchQuery));
+
             var totalObjects = new List<PropertyDto>();
 
             // Get the first page in order to find the total number of pages
@@ -43,6 +48,11 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
             totalObjects.AddRange(firstApiResponseContent.Properties);
 
             var totalPages = Enumerable.Range(2, firstApiResponseContent.Paging.NumberOfPages).ToList();
+
+            if (totalPages.Count == 1)
+            {
+                return totalObjects;
+            }
 
             // Setup the rest of the tasks
             var getApiResponseTaskQuery =
