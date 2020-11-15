@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>6e6fd44d-7527-4330-99f0-cc08d207fb34</ProjectGuid>
+    <ProjectGuid>781a70e5-35a5-495b-9af7-4760d110ca42</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>realestateagents.webapi</DockerServiceName>
