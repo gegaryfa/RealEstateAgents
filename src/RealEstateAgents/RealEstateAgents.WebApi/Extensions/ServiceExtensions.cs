@@ -18,7 +18,7 @@ namespace RealEstateAgents.WebApi.Extensions
                 {
                     Version = "v1",
                     Title = "RealEstateAgents.WebApi",
-                    Description = "This Api will be responsible for overall data distribution and authorization.",
+                    Description = "This API retrieves and shows the top real estate agents in an area.",
                     Contact = new OpenApiContact
                     {
                         Name = "George",
