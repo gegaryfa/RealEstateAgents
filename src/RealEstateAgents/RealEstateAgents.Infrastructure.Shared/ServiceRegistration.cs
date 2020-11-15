@@ -28,9 +28,10 @@ namespace RealEstateAgents.Infrastructure.Shared
             services.Configure<CacheConfiguration>(config.GetSection("CacheConfiguration"));
 
             services.AddDistributedMemoryCache();
-            services.AddDistributedRedisCache(options =>
+            services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = config.GetConnectionString("Redis");
+                options.InstanceName = "Redis";
             });
 
             services.AddTransient<ICacheService, CacheService>();
