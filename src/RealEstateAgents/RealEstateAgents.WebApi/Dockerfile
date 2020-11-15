@@ -6,13 +6,13 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["RealEstateAgents/RealEstateAgents.WebApi/RealEstateAgents.WebApi.csproj", "RealEstateAgents/RealEstateAgents.WebApi/"]
-COPY ["RealEstateAgents/RealEstateAgents.Infrastructure.Shared/RealEstateAgents.Infrastructure.Shared.csproj", "RealEstateAgents/RealEstateAgents.Infrastructure.Shared/"]
-COPY ["RealEstateAgents/RealEstateAgents.Application/RealEstateAgents.Application.csproj", "RealEstateAgents/RealEstateAgents.Application/"]
-COPY ["RealEstateAgents/RealEstateAgents.Domain/RealEstateAgents.Domain.csproj", "RealEstateAgents/RealEstateAgents.Domain/"]
-RUN dotnet restore "RealEstateAgents/RealEstateAgents.WebApi/RealEstateAgents.WebApi.csproj"
+COPY ["src/RealEstateAgents/RealEstateAgents.WebApi/RealEstateAgents.WebApi.csproj", "src/RealEstateAgents/RealEstateAgents.WebApi/"]
+COPY ["src/RealEstateAgents/RealEstateAgents.Infrastructure.Shared/RealEstateAgents.Infrastructure.Shared.csproj", "src/RealEstateAgents/RealEstateAgents.Infrastructure.Shared/"]
+COPY ["src/RealEstateAgents/RealEstateAgents.Application/RealEstateAgents.Application.csproj", "src/RealEstateAgents/RealEstateAgents.Application/"]
+COPY ["src/RealEstateAgents/RealEstateAgents.Domain/RealEstateAgents.Domain.csproj", "src/RealEstateAgents/RealEstateAgents.Domain/"]
+RUN dotnet restore "src/RealEstateAgents/RealEstateAgents.WebApi/RealEstateAgents.WebApi.csproj"
 COPY . .
-WORKDIR "/src/RealEstateAgents/RealEstateAgents.WebApi"
+WORKDIR "/src/src/RealEstateAgents/RealEstateAgents.WebApi"
 RUN dotnet build "RealEstateAgents.WebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish

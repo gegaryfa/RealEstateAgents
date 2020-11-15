@@ -19,13 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Infrastructure.Shared", "src\RealEstateAgents\RealEstateAgents.Infrastructure.Shared\RealEstateAgents.Infrastructure.Shared.csproj", "{95A8206A-E8F9-4132-9A6C-6FFB82586D78}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6E6FD44D-7527-4330-99F0-CC08D207FB34}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{9B55479B-49C9-46F2-A595-6978A1EB3F40}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{92778F5D-63F7-4268-A633-1A068474D79F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgents.Infrastructure.Shared.Tests", "tst\Infrastructure\RealEstateAgents.Infrastructure.Shared.Tests\RealEstateAgents.Infrastructure.Shared.Tests.csproj", "{39701290-5D80-4D11-83F7-DD11B2B6C1B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateAgents.Infrastructure.Shared.Tests", "tst\Infrastructure\RealEstateAgents.Infrastructure.Shared.Tests\RealEstateAgents.Infrastructure.Shared.Tests.csproj", "{39701290-5D80-4D11-83F7-DD11B2B6C1B8}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{781A70E5-35A5-495B-9AF7-4760D110CA42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +49,14 @@ Global
 		{95A8206A-E8F9-4132-9A6C-6FFB82586D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95A8206A-E8F9-4132-9A6C-6FFB82586D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95A8206A-E8F9-4132-9A6C-6FFB82586D78}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E6FD44D-7527-4330-99F0-CC08D207FB34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39701290-5D80-4D11-83F7-DD11B2B6C1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{781A70E5-35A5-495B-9AF7-4760D110CA42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{781A70E5-35A5-495B-9AF7-4760D110CA42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{781A70E5-35A5-495B-9AF7-4760D110CA42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{781A70E5-35A5-495B-9AF7-4760D110CA42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
