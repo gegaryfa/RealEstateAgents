@@ -1,6 +1,9 @@
 version: '3.4'
 
 services:
+    cachedb:
+        image: redis
+    
     realestateagentsapi:
         image: ${DOCKER_REGISTRY-}realestateagentswebapi
         build:

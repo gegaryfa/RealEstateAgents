@@ -20,7 +20,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
 
         public async Task<List<PropertyDto>> FetchAllProperties(string typeOfSearch, string searchQuery)
         {
-            var cacheKey = $"{typeOfSearch}-{searchQuery}";
+            var cacheKey = $"{typeOfSearch}{searchQuery}";
             var cachedProperties = await _cache
                 .Get(cacheKey, async () => await _propertyDataHelper.FetchAllProperties(typeOfSearch, searchQuery));
 

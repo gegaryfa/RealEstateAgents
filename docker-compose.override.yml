@@ -1,12 +1,21 @@
 version: '3.4'
 
 services:
+    cachedb:
+        container_name: cachedb
+        restart: always
+        ports:
+            - "6379:6379"
+
     realestateagentsapi:
         container_name: realestateagentsapi
-        restart: on-failure  
+        depends_on:
+            - cachedb
+        restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - DOTNET_RUNNING_IN_CONTAINER=true # Might be redundant since most images have this predefined
+            - "ConnectionStrings:Redis=cachedb:6379"      #override the connection string from appSettings: point to the redis container
         volumes:
             - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
             - ${HOME}/.aspnet/https/:/root/.aspnet/https/
