@@ -63,10 +63,10 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
 
             var testDataFilePath = Directory.GetCurrentDirectory() + "/TestData/ApiResponse-Properties.json";
             var jsonData = await File.ReadAllTextAsync(testDataFilePath);
-            var fundaApiResponseContent = JsonConvert.DeserializeObject<PropertiesApiResponse>(jsonData);
+            var propertiesApiResponseContent = JsonConvert.DeserializeObject<PropertiesApiResponse>(jsonData);
 
             var apiResponse = new Response<PropertiesApiResponse>(null, new HttpResponseMessage(HttpStatusCode.OK),
-                () => fundaApiResponseContent);
+                () => propertiesApiResponseContent);
 
             A.CallTo(() => this._propertiesApi.GetPropertiesForSaleAsync(PropertiesForSaleTypeOfSearch, PropertiesInAmsterdamSearchQuery, page, PageSize))
                 .Returns(apiResponse);
@@ -88,7 +88,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
                 .MustHaveHappened();
 
             result.Should().NotBeNull();
-            result.Count.Should().Be(fundaApiResponseContent.TotalNumberOfProperties);
+            result.Count.Should().Be(propertiesApiResponseContent.TotalNumberOfProperties);
         }
 
         [TestMethod]
@@ -99,10 +99,10 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
 
             var testDataFilePath = Directory.GetCurrentDirectory() + "/TestData/ApiResponse-PropertiesWithGarden.json";
             var jsonData = await File.ReadAllTextAsync(testDataFilePath);
-            var fundaApiResponseContent = JsonConvert.DeserializeObject<PropertiesApiResponse>(jsonData);
+            var propertiesApiResponseContent = JsonConvert.DeserializeObject<PropertiesApiResponse>(jsonData);
 
             var apiResponse = new Response<PropertiesApiResponse>(null, new HttpResponseMessage(HttpStatusCode.OK),
-                () => fundaApiResponseContent);
+                () => propertiesApiResponseContent);
 
             A.CallTo(() => this._propertiesApi.GetPropertiesForSaleAsync(PropertiesForSaleTypeOfSearch, PropertiesInAmsterdamWithGardenSearchQuery, page, PageSize))
                 .Returns(apiResponse);
@@ -124,7 +124,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
                 .MustHaveHappened();
 
             result.Should().NotBeNull();
-            result.Count.Should().Be(fundaApiResponseContent.TotalNumberOfProperties);
+            result.Count.Should().Be(propertiesApiResponseContent.TotalNumberOfProperties);
         }
     }
 }
