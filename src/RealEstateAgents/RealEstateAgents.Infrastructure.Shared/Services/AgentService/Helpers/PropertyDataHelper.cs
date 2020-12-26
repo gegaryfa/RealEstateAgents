@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
+using AutoMapper;
+
 using EnsureThat;
 
 using Microsoft.Extensions.Logging;
@@ -15,6 +17,7 @@ using Polly;
 using RealEstateAgents.Application.DTOs.Property;
 using RealEstateAgents.Application.Interfaces.Clients;
 using RealEstateAgents.Application.Interfaces.Services.AgentService.Helpers;
+using RealEstateAgents.Domain.Entities;
 
 using RestEase;
 
@@ -25,27 +28,29 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
         private const int ApiRequestMaxRetries = 5;
 
         private readonly IPropertiesApi _propertiesApi;
+        private readonly IMapper _mapper;
         private readonly ILogger<PropertyDataHelper> _logger;
         private const int PageSize = 25;
 
-        public PropertyDataHelper(IPropertiesApi propertiesApi, ILogger<PropertyDataHelper> logger)
+        public PropertyDataHelper(IPropertiesApi propertiesApi, ILogger<PropertyDataHelper> logger, IMapper mapper)
         {
             _propertiesApi = propertiesApi;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public async Task<List<PropertyDto>> FetchAllProperties(string typeOfSearch, string searchQuery)
+        public async Task<List<Property>> FetchAllProperties(string typeOfSearch, string searchQuery)
         {
             EnsureArg.IsNotNull(typeOfSearch, nameof(typeOfSearch));
             EnsureArg.IsNotNull(searchQuery, nameof(searchQuery));
 
-            var totalObjects = new List<PropertyDto>();
+            var totalObjects = new List<Property>();
 
             // Get the first page in order to find the total number of pages
             var firstApiResponseContent = await GetApiResponseContentForPageAsync(1, PageSize, typeOfSearch, searchQuery);
 
             // Add the objects of the current page to the total amount of objects
-            totalObjects.AddRange(firstApiResponseContent.Properties);
+            totalObjects.AddRange(_mapper.Map<IEnumerable<Property>>(firstApiResponseContent.Properties));
 
             var totalPages = Enumerable.Range(2, firstApiResponseContent.Paging.NumberOfPages).ToList();
 
@@ -74,7 +79,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
                 var apiResponseContent = await finishedTask;
 
                 // Add the object of the page in the total objects
-                totalObjects.AddRange(apiResponseContent.Properties);
+                totalObjects.AddRange(_mapper.Map<IEnumerable<Property>>(apiResponseContent.Properties));
             }
 
             return totalObjects;

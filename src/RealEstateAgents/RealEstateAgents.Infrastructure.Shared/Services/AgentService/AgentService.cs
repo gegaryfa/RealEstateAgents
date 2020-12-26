@@ -2,17 +2,19 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using EnsureThat;
+
 using RealEstateAgents.Application.DTOs.Agent;
-using RealEstateAgents.Application.DTOs.Property;
 using RealEstateAgents.Application.Features.Agents.Queries.GetTopAgents;
 using RealEstateAgents.Application.Interfaces.Services.AgentService;
 using RealEstateAgents.Application.Interfaces.Services.AgentService.Helpers;
+using RealEstateAgents.Domain.Entities;
 
 namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService
 {
     public class AgentService : IAgentService
     {
-        private const string Sale = "koop";
+        private const string Buy = "koop";
         private const string Rent = "huur";
         private const string GardenQueryParam = "tuin";
 
@@ -25,8 +27,9 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService
 
         public async Task<GetTopAgentsResponse> GetTopAgents(GetTopAgentsRequest request)
         {
+            EnsureArg.IsNotNull(request, nameof(request));
             // todo: refactor to a query builder
-            var rentOrBuy = request.TypeOfSearch == TypeOfSearch.Buy ? Sale : Rent;
+            var rentOrBuy = request.TypeOfSearch == TypeOfSearch.Buy ? Buy : Rent;
 
             var searchQuery = "/";
             searchQuery += request.Region + "/";
@@ -44,21 +47,21 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService
             };
         }
 
-        private static IEnumerable<AgentDto> GetTopAgentsDescending(int numberOfAgents, IEnumerable<PropertyDto> allProperties)
+        private static IEnumerable<Agent> GetTopAgentsDescending(int numberOfAgents, IEnumerable<Property> allProperties)
         {
             var topList =
                 allProperties
-                    .GroupBy(o => o.AgentId)
+                    .GroupBy(o => o.Agent.Id)
                     .OrderByDescending(m => m.Count())
                     .Take(numberOfAgents)
                     .ToList();
 
             var topAgents = topList
                 .Select(agent => agent.First())
-                .Select(currentProperty => new AgentDto
+                .Select(currentProperty => new Agent
                 {
-                    Id = currentProperty.AgentId,
-                    Name = currentProperty.AgentName
+                    Id = currentProperty.Agent.Id,
+                    Name = currentProperty.Agent.Name
                 }).ToList();
             return topAgents;
         }

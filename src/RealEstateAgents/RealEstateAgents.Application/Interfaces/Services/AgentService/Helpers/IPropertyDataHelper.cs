@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using RealEstateAgents.Application.DTOs.Property;
+using RealEstateAgents.Domain.Entities;
 
 namespace RealEstateAgents.Application.Interfaces.Services.AgentService.Helpers
 {
@@ -10,6 +10,6 @@ namespace RealEstateAgents.Application.Interfaces.Services.AgentService.Helpers
     /// </summary>
     public interface IPropertyDataHelper
     {
-        Task<List<PropertyDto>> FetchAllProperties(string typeOfSearch, string searchQuery);
+        Task<List<Property>> FetchAllProperties(string typeOfSearch, string searchQuery);
     }
 }

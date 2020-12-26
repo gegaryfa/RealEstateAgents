@@ -4,6 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using AutoMapper;
+
 using FakeItEasy;
 
 using FluentAssertions;
@@ -16,6 +18,7 @@ using Newtonsoft.Json;
 using RealEstateAgents.Application.DTOs.Property;
 using RealEstateAgents.Application.Interfaces.Clients;
 using RealEstateAgents.Application.Interfaces.Services.AgentService.Helpers;
+using RealEstateAgents.Application.Mappings;
 using RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers;
 
 using RestEase;
@@ -33,6 +36,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
 
         private IPropertiesApi _propertiesApi;
         private ILogger<PropertyDataHelper> _logger;
+        private IMapper _mapper;
         private IPropertyDataHelper _propertyDataHelper;
 
         [TestInitialize]
@@ -40,7 +44,14 @@ namespace RealEstateAgents.Infrastructure.Shared.Tests.Services.Helpers
         {
             this._propertiesApi = A.Fake<IPropertiesApi>();
             this._logger = A.Fake<ILogger<PropertyDataHelper>>();
-            this._propertyDataHelper = new PropertyDataHelper(this._propertiesApi, this._logger);
+
+            var mockMapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new GeneralProfile());
+            });
+            this._mapper = mockMapper.CreateMapper();
+
+            this._propertyDataHelper = new PropertyDataHelper(this._propertiesApi, this._logger, this._mapper);
         }
 
         [DataTestMethod]

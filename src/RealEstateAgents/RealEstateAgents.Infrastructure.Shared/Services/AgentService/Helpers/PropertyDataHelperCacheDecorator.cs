@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using RealEstateAgents.Application.DTOs.Property;
 using RealEstateAgents.Application.Interfaces.Services.AgentService.Helpers;
 using RealEstateAgents.Application.Interfaces.Services.Cache;
+using RealEstateAgents.Domain.Entities;
 
 namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
 {
@@ -18,7 +18,7 @@ namespace RealEstateAgents.Infrastructure.Shared.Services.AgentService.Helpers
             _cache = cache;
         }
 
-        public async Task<List<PropertyDto>> FetchAllProperties(string typeOfSearch, string searchQuery)
+        public async Task<List<Property>> FetchAllProperties(string typeOfSearch, string searchQuery)
         {
             var cacheKey = $"{typeOfSearch}{searchQuery}";
             var cachedProperties = await _cache
